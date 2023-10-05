@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 
 import 'package:flutter/material.dart';
 
@@ -34,6 +35,12 @@ class _MyHomePageState extends State<MyHomePage> {
   double _left = 300;
   double _top = 200;
 
+  double _carHeight = 200;
+  double _carWidth = 200;
+
+  double _containerHeight = 0;
+  double _containerWidth = 0;
+
   Timer? _smashedTimer;
 
   final NetworkImage _intactAltima = NetworkImage('https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcT1E6kYE5_d9uoMa9N8cUPCsLpcM4RNss-wwzFsqqfmOfGFUJ9-');
@@ -49,8 +56,9 @@ class _MyHomePageState extends State<MyHomePage> {
         () {
           setState(() {
             _smashed = false;
-            _left += 30;
-            _top += 30;
+            debugPrint("_containerHeight: $_containerHeight _containerWidth: $_containerWidth");
+            _left = Random().nextDouble() * (_containerWidth - _carWidth);
+            _top = Random().nextDouble() * (_containerHeight - _carHeight);
           });
         },
       );
@@ -59,6 +67,10 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.sizeOf(context);
+    _containerHeight = size.height;
+    _containerWidth = size.width;
+
     return Stack(
       children: <Widget>[
         Positioned(
@@ -68,8 +80,8 @@ class _MyHomePageState extends State<MyHomePage> {
             onTap: _clickCar,
             child: Image(
                 image: _smashed ? _smashedAltima : _intactAltima as ImageProvider<Object>,
-                height: 200,
-                width: 200),
+                height: _carHeight,
+                width: _carWidth),
           ),
         )
       ],
