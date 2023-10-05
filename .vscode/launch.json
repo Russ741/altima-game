@@ -13,7 +13,6 @@
                 "-d",
                 "chrome"
             ],
-            "flutterMode": "release"
         },
         {
             "name": "altima_game (profile mode)",
