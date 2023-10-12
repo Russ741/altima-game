@@ -11,7 +11,7 @@ void main() {
 
 class SoundService {
   Soundpool pool = Soundpool.fromOptions(options: const SoundpoolOptions(
-      streamType: StreamType.notification,
+      streamType: StreamType.music,
       maxStreams: 10));
   int glassId = -1;
 
@@ -55,8 +55,8 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   bool _smashed = false;
-  double _left = 300;
-  double _top = 200;
+  double _left = 50;
+  double _top = 50;
 
   double _carHeight = 200;
   double _carWidth = 200;
