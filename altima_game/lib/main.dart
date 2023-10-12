@@ -1,10 +1,33 @@
 import 'dart:async';
 import 'dart:math';
+import 'package:flutter/services.dart';
+import 'package:soundpool/soundpool.dart';
 
 import 'package:flutter/material.dart';
 
 void main() {
   runApp(const MyApp());
+}
+
+class SoundService {
+  Soundpool pool = Soundpool.fromOptions(options: const SoundpoolOptions(
+      streamType: StreamType.notification,
+      maxStreams: 10));
+  int glassId = -1;
+
+  SoundService()
+  {
+    init();
+  }
+
+  Future init() async {
+    glassId = await pool.load(await rootBundle.load("sounds/glass.mp3"));
+  }
+
+  playGlass() {
+    debugPrint("Playing glass sound.");
+    pool.play(glassId);
+  }
 }
 
 class MyApp extends StatelessWidget {
@@ -43,11 +66,14 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Timer? _smashedTimer;
 
+  SoundService _soundService = SoundService();
+
   final NetworkImage _intactAltima = NetworkImage('https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcT1E6kYE5_d9uoMa9N8cUPCsLpcM4RNss-wwzFsqqfmOfGFUJ9-');
   final AssetImage _smashedAltima = AssetImage('images/smashed-altima.jpeg');
 
   void _clickCar() {
     if (! _smashed) {
+      _soundService.playGlass();
       setState(() {
         _smashed = true;
       });
