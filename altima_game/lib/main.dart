@@ -71,7 +71,7 @@ class _MyHomePageState extends State<MyHomePage> {
   final NetworkImage _intactAltima = NetworkImage('https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcT1E6kYE5_d9uoMa9N8cUPCsLpcM4RNss-wwzFsqqfmOfGFUJ9-');
   final AssetImage _smashedAltima = AssetImage('images/smashed-altima.jpeg');
 
-  void _clickCar() {
+  void _clickCar(TapDownDetails _) {
     if (! _smashed) {
       _soundService.playGlass();
       setState(() {
@@ -103,7 +103,7 @@ class _MyHomePageState extends State<MyHomePage> {
           top: _top,
           left: _left,
           child: GestureDetector(
-            onTap: _clickCar,
+            onTapDown: _clickCar,
             child: Image(
                 image: _smashed ? _smashedAltima : _intactAltima as ImageProvider<Object>,
                 height: _carHeight,
