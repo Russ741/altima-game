@@ -4,6 +4,24 @@ Something I made for a friend who was having a bad car day. Now with sound!
 
 Check it out [here](https://russ741.github.io/altima-game/).
 
+# Deployment Process
+
+From the ```altima_game``` directory in the [altima-game](https://github.com/Russ741/altima-game) repository:
+```
+flutter build web --base-href "/altima-game/"
+rm -rf ../docs/*
+cp -R build/web/* ../docs
+git add ../
+git commit -m "INSERT NEW REVISION NOTE HERE"
+git push
+```
+
+As of the time of writing, the --base-href flag parsing was a bit flaky. On some platforms, flutter build would complain with:
+```
+base-href should start and end with /
+```
+Even when the flag value does.
+
 # Credits And Attributions
 * [smashing glass.wav](https://freesound.org/people/mgamabile/sounds/440773/) courtesy of [mgamabile](https://freesound.org/people/mgamabile/), licensed under Creative Commons Zero.
 * [Intact Altima](https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcT1E6kYE5_d9uoMa9N8cUPCsLpcM4RNss-wwzFsqqfmOfGFUJ9-): loaded dynamically from Google Static Serving - photo credit NissanUSA.com
